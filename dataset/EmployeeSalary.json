@@ -1,0 +1,35 @@
+{
+	"name": "EmployeeSalary",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ZealData",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "EmployeeDemo"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "EmployeeSalary.csv",
+				"container": "empstore"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "EmployeeId",
+				"type": "String"
+			},
+			{
+				"name": "BasePay",
+				"type": "String"
+			}
+		]
+	}
+}

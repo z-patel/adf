@@ -1,0 +1,59 @@
+{
+	"name": "EmployeeInfo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ZealData",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "EmployeeDemo"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "EmployeeInfo.csv",
+				"container": "empstore"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "EmployeeId",
+				"type": "String"
+			},
+			{
+				"name": "FirstName",
+				"type": "String"
+			},
+			{
+				"name": "LastName",
+				"type": "String"
+			},
+			{
+				"name": "City",
+				"type": "String"
+			},
+			{
+				"name": "ZIP",
+				"type": "String"
+			},
+			{
+				"name": "Email",
+				"type": "String"
+			},
+			{
+				"name": "State",
+				"type": "String"
+			},
+			{
+				"name": "DateOfJoining",
+				"type": "String"
+			}
+		]
+	}
+}

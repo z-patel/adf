@@ -1,0 +1,51 @@
+{
+	"name": "EmployeeDemo",
+	"properties": {
+		"description": "Calculate average salary from employee data using Power Query",
+		"activities": [
+			{
+				"name": "AverageEmployeeSalary",
+				"description": "Calculate average salary from employee data",
+				"type": "ExecuteWranglingDataflow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "EmployeeSalaryDemo",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"queries": [
+						{
+							"queryName": "UserQuery",
+							"dataflowSinks": [
+								{
+									"name": "EmployeeSink",
+									"dataset": {
+										"referenceName": "EmployeeSink",
+										"type": "DatasetReference"
+									},
+									"script": "sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['SanitizedEmployeeData'],\n\ttruncate: true) ~> EmployeeSink"
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"folder": {
+			"name": "EmployeeDemo"
+		},
+		"annotations": []
+	}
+}
