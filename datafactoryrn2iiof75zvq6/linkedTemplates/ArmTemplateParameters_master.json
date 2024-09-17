@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "datafactoryrn2iiof75zvq6"
+		},
+		"ArmtemplateStorageLinkedService_connectionString": {
+			"value": ""
+		},
+		"EmpData_connectionString": {
+			"value": ""
+		},
+		"EmpOutput_connectionString": {
+			"value": ""
+		},
+		"MovieDestination_connectionString": {
+			"value": ""
+		},
+		"MovieSource_connectionString": {
+			"value": ""
+		},
+		"ZealData_connectionString": {
+			"value": ""
+		},
+		"zealexternal_connectionString": {
+			"value": ""
+		},
+		"zealinternal_connectionString": {
+			"value": ""
+		},
+		"zealproduction_connectionString": {
+			"value": ""
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

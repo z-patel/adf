@@ -1,0 +1,729 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "datafactoryrn2iiof75zvq6"
+		},
+		"ArmtemplateStorageLinkedService_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ArmtemplateStorageLinkedService'"
+		},
+		"EmpData_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'EmpData'"
+		},
+		"EmpOutput_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'EmpOutput'"
+		},
+		"MovieDestination_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'MovieDestination'"
+		},
+		"MovieSource_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'MovieSource'"
+		},
+		"ZealData_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ZealData'"
+		},
+		"zealexternal_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'zealexternal'"
+		},
+		"zealinternal_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'zealinternal'"
+		},
+		"zealproduction_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'zealproduction'"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/ArmtemplateStorageLinkedService')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('ArmtemplateStorageLinkedService_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EmpData')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('EmpData_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EmpOutput')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('EmpOutput_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MovieDestination')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('MovieDestination_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MovieSource')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('MovieSource_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ZealData')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('ZealData_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/zealexternal')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('zealexternal_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/zealinternal')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('zealinternal_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/zealproduction')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('zealproduction_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ArmtemplateTestDatasetIn')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ArmtemplateStorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "moviesDB2.csv",
+						"folderPath": "input",
+						"container": "datafactory"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ArmtemplateStorageLinkedService')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ArmtemplateTestDatasetOut')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ArmtemplateStorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "output",
+						"container": "datafactory"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ArmtemplateStorageLinkedService')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EmployeeInfo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ZealData",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "EmployeeDemo"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "EmployeeInfo.csv",
+						"container": "empstore"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "EmployeeId",
+						"type": "String"
+					},
+					{
+						"name": "FirstName",
+						"type": "String"
+					},
+					{
+						"name": "LastName",
+						"type": "String"
+					},
+					{
+						"name": "City",
+						"type": "String"
+					},
+					{
+						"name": "ZIP",
+						"type": "String"
+					},
+					{
+						"name": "Email",
+						"type": "String"
+					},
+					{
+						"name": "State",
+						"type": "String"
+					},
+					{
+						"name": "DateOfJoining",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ZealData')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EmployeeSalary')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ZealData",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "EmployeeDemo"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "EmployeeSalary.csv",
+						"container": "empstore"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "EmployeeId",
+						"type": "String"
+					},
+					{
+						"name": "BasePay",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ZealData')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EmployeeSink')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ZealData",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "EmployeeDemo"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "output",
+						"container": "empstore"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": false,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ZealData')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ExternalDataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "zealexternal",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Accidents_2015.csv",
+						"container": "accidentdata"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Accident_Index",
+						"type": "String"
+					},
+					{
+						"name": "Location_Easting_OSGR",
+						"type": "String"
+					},
+					{
+						"name": "Location_Northing_OSGR",
+						"type": "String"
+					},
+					{
+						"name": "Longitude",
+						"type": "String"
+					},
+					{
+						"name": "Latitude",
+						"type": "String"
+					},
+					{
+						"name": "Police_Force",
+						"type": "String"
+					},
+					{
+						"name": "Accident_Severity",
+						"type": "String"
+					},
+					{
+						"name": "Number_of_Vehicles",
+						"type": "String"
+					},
+					{
+						"name": "Number_of_Casualties",
+						"type": "String"
+					},
+					{
+						"name": "Date",
+						"type": "String"
+					},
+					{
+						"name": "Day_of_Week",
+						"type": "String"
+					},
+					{
+						"name": "Time",
+						"type": "String"
+					},
+					{
+						"name": "Local_Authority_(District)",
+						"type": "String"
+					},
+					{
+						"name": "Local_Authority_(Highway)",
+						"type": "String"
+					},
+					{
+						"name": "1st_Road_Class",
+						"type": "String"
+					},
+					{
+						"name": "1st_Road_Number",
+						"type": "String"
+					},
+					{
+						"name": "Road_Type",
+						"type": "String"
+					},
+					{
+						"name": "Speed_limit",
+						"type": "String"
+					},
+					{
+						"name": "Junction_Detail",
+						"type": "String"
+					},
+					{
+						"name": "Junction_Control",
+						"type": "String"
+					},
+					{
+						"name": "2nd_Road_Class",
+						"type": "String"
+					},
+					{
+						"name": "2nd_Road_Number",
+						"type": "String"
+					},
+					{
+						"name": "Pedestrian_Crossing-Human_Control",
+						"type": "String"
+					},
+					{
+						"name": "Pedestrian_Crossing-Physical_Facilities",
+						"type": "String"
+					},
+					{
+						"name": "Light_Conditions",
+						"type": "String"
+					},
+					{
+						"name": "Weather_Conditions",
+						"type": "String"
+					},
+					{
+						"name": "Road_Surface_Conditions",
+						"type": "String"
+					},
+					{
+						"name": "Special_Conditions_at_Site",
+						"type": "String"
+					},
+					{
+						"name": "Carriageway_Hazards",
+						"type": "String"
+					},
+					{
+						"name": "Urban_or_Rural_Area",
+						"type": "String"
+					},
+					{
+						"name": "Did_Police_Officer_Attend_Scene_of_Accident",
+						"type": "String"
+					},
+					{
+						"name": "LSOA_of_Accident_Location",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/zealexternal')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/InternalDataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "zealinternal",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "accidentdata"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/zealinternal')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MovieDataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "MovieSource",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "EmployeeInfo.csv",
+						"container": "empstore"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "EmployeeId",
+						"type": "String"
+					},
+					{
+						"name": "FirstName",
+						"type": "String"
+					},
+					{
+						"name": "LastName",
+						"type": "String"
+					},
+					{
+						"name": "City",
+						"type": "String"
+					},
+					{
+						"name": "ZIP",
+						"type": "String"
+					},
+					{
+						"name": "Email",
+						"type": "String"
+					},
+					{
+						"name": "State",
+						"type": "String"
+					},
+					{
+						"name": "DateOfJoining",
+						"type": "String"
+					},
+					{
+						"name": "hiphens",
+						"type": "String"
+					},
+					{
+						"name": "mix",
+						"type": "String"
+					},
+					{
+						"name": "defaultsimpleformat",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/MovieSource')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ProductionDataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "zealproduction",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "accidentdata"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/zealproduction')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ArmtemplateSampleCopyPipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "MyCopyActivity",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "ArmtemplateTestDatasetIn",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ArmtemplateTestDatasetOut",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2024-09-17T12:51:22Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ArmtemplateTestDatasetIn')]",
+				"[concat(variables('factoryId'), '/datasets/ArmtemplateTestDatasetOut')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EmployeeSalaryDemo')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "WranglingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"name": "EmployeeInfo",
+							"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> EmployeeInfo",
+							"dataset": {
+								"referenceName": "EmployeeInfo",
+								"type": "DatasetReference"
+							}
+						},
+						{
+							"name": "EmployeeSalary",
+							"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> EmployeeSalary",
+							"dataset": {
+								"referenceName": "EmployeeSalary",
+								"type": "DatasetReference"
+							}
+						}
+					],
+					"script": "section Section1;\r\nshared EmployeeInfo = let AdfDoc = AzureStorage.BlobContents(\"https://zealadf1.blob.core.windows.net/empstore/EmployeeInfo.csv\"),Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]), PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true]) in  PromotedHeaders;\r\nshared EmployeeSalary = let AdfDoc = AzureStorage.BlobContents(\"https://zealadf1.blob.core.windows.net/empstore/EmployeeSalary.csv\"),Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]), PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true]) in  PromotedHeaders;\r\nshared UserQuery = let\r\n  Source = EmployeeInfo,\r\n  JoinTransformation = Table.NestedJoin(Source, {\"EmployeeId\"}, EmployeeSalary, {\"EmployeeId\"}, \"EmployeeSalary\", JoinKind.Inner),\r\n  ExpandColumns = Table.ExpandTableColumn(JoinTransformation, \"EmployeeSalary\", {\"BasePay\"}, {\"EmployeeSalary.BasePay\"}),\r\n  RemoveColumns = Table.RemoveColumns(ExpandColumns, {\"EmployeeId\", \"FirstName\", \"LastName\", \"ZIP\", \"State\", \"DateOfJoining\"}),\r\n  ReplacedQuotes = Table.ReplaceValue(RemoveColumns, \"\"\"\", \"\", Replacer.ReplaceText, {\"City\", \"Email\"}),\r\n  #\"Inserted conditional column\" = Table.AddColumn(ReplacedQuotes, \"SanitizedEmail\", each if not Text.Contains([Email], \"@\") then \"\" else if not Text.Contains([Email], \".\") then \"\" else [Email]),\r\n  RemoveEmailColumn = Table.RemoveColumns(#\"Inserted conditional column\", {\"Email\"}),\r\n  ConvertIdToNumber = Table.TransformColumnTypes(RemoveEmailColumn, {{\"EmployeeSalary.BasePay\", type number}}),\r\n  RemoveRowsWithEmptyEmail = Table.SelectRows(ConvertIdToNumber, each [SanitizedEmail] <> null and [SanitizedEmail] <> \"\"),\r\n  AverageSalaryByCity = Table.Group(RemoveRowsWithEmptyEmail, {\"City\"}, {{\"AverageSalary\", each List.Average([EmployeeSalary.BasePay]), type number}}),\r\n  #\"Filtered rows\" = Table.SelectRows(AverageSalaryByCity, each [AverageSalary] <> null and [AverageSalary] <= 200000)\r\nin\r\n  #\"Filtered rows\";\r\n",
+					"documentLocale": "en-us"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/EmployeeInfo')]",
+				"[concat(variables('factoryId'), '/datasets/EmployeeSalary')]"
+			]
+		}
+	]
+}

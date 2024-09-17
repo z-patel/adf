@@ -1,0 +1,125 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "datafactoryrn2iiof75zvq6"
+		},
+		"ArmtemplateStorageLinkedService_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ArmtemplateStorageLinkedService'"
+		},
+		"EmpData_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'EmpData'"
+		},
+		"EmpOutput_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'EmpOutput'"
+		},
+		"MovieDestination_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'MovieDestination'"
+		},
+		"MovieSource_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'MovieSource'"
+		},
+		"ZealData_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ZealData'"
+		},
+		"zealexternal_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'zealexternal'"
+		},
+		"zealinternal_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'zealinternal'"
+		},
+		"zealproduction_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'zealproduction'"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "datafactoryrn2iiof75zvq6_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"ArmtemplateStorageLinkedService_connectionString": {
+						"value": "[parameters('ArmtemplateStorageLinkedService_connectionString')]"
+					},
+					"EmpData_connectionString": {
+						"value": "[parameters('EmpData_connectionString')]"
+					},
+					"EmpOutput_connectionString": {
+						"value": "[parameters('EmpOutput_connectionString')]"
+					},
+					"MovieDestination_connectionString": {
+						"value": "[parameters('MovieDestination_connectionString')]"
+					},
+					"MovieSource_connectionString": {
+						"value": "[parameters('MovieSource_connectionString')]"
+					},
+					"ZealData_connectionString": {
+						"value": "[parameters('ZealData_connectionString')]"
+					},
+					"zealexternal_connectionString": {
+						"value": "[parameters('zealexternal_connectionString')]"
+					},
+					"zealinternal_connectionString": {
+						"value": "[parameters('zealinternal_connectionString')]"
+					},
+					"zealproduction_connectionString": {
+						"value": "[parameters('zealproduction_connectionString')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "datafactoryrn2iiof75zvq6_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'datafactoryrn2iiof75zvq6_ArmTemplate_0')]"
+			]
+		}
+	]
+}
