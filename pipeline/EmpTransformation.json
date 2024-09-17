@@ -1,0 +1,49 @@
+{
+	"name": "EmpTransformation",
+	"properties": {
+		"description": "Employee Info Transform w PowerQuery",
+		"activities": [
+			{
+				"name": "MovieDataPowerQuery",
+				"type": "ExecuteWranglingDataflow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "powerquery1",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"queries": [
+						{
+							"queryName": "UserQuery",
+							"dataflowSinks": [
+								{
+									"name": "UserQueryMovieDataset",
+									"dataset": {
+										"referenceName": "MovieDataset",
+										"type": "DatasetReference"
+									},
+									"script": "sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tEmployeeId as string,\n\t\tFirstName as string,\n\t\tLastName as string,\n\t\tCity as string,\n\t\tZIP as string,\n\t\tEmail as string,\n\t\tState as string,\n\t\tDateOfJoining as string,\n\t\thiphens as string,\n\t\tmix as string,\n\t\tdefaultsimpleformat as string\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> UserQueryMovieDataset"
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2024-09-17T13:19:06Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

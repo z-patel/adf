@@ -1,0 +1,20 @@
+{
+	"name": "powerquery1",
+	"properties": {
+		"type": "WranglingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "MovieDataset",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> MovieDataset",
+					"dataset": {
+						"referenceName": "MovieDataset",
+						"type": "DatasetReference"
+					}
+				}
+			],
+			"script": "section Section1;\r\nshared MovieDataset = let AdfDoc = AzureStorage.BlobContents(\"https://zealadf1.blob.core.windows.net/empstore/EmployeeInfo.csv\"),Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]), PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true]) in  PromotedHeaders;\r\nshared UserQuery = let Source = #\"MovieDataset\",\r\n  #\"Renamed columns\" = Table.RenameColumns(Source, {{\"DateOfJoining\", \"JoinDate\"}}) in #\"Renamed columns\";\r\n",
+			"documentLocale": "en-us"
+		}
+	}
+}
